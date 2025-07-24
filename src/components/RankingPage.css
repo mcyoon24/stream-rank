@@ -1,0 +1,34 @@
+.rankingpage-container {
+    padding-left: 4rem;
+    margin: 0rem 6rem;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header-title {
+    font-size: 3rem; 
+    /* padding: 0.5rem 1rem; */
+}
+
+.ranking-title {
+    font-size: 1rem;
+}
+
+.ranking-ol{
+    font-size: 2rem;
+}
+
+.ranking-li {
+    font-size: 1.2rem;
+}
+
+.return-button {
+    margin-top: 10rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
