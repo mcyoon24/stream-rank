@@ -9,7 +9,7 @@ function NotFound() {
         <div className = "notfound-container">
             <h1>Page Not Found</h1>
             <p>Sorry, we couldn't find the page you were looking for</p>
-            <button className = "return-button" onClick={() => navigate(`/`)}>Return to Home</button>
+            <button onClick={() => navigate(`/`)}>Return to Home</button>
         </div>
     );
 }

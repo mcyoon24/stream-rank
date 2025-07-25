@@ -1,33 +1,62 @@
 import './RankingPage.css';
 import { useParams } from 'react-router-dom';
-import movieData from '../data/movieData';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { getMoviesForPlatform } from '../api/movieService';
 
 
 function RankingPage() {
     const params = useParams();
     const platform = params.platform;
-    const movies = movieData[platform];
-    const sortedMovies = movies ? [...movies].sort((a, b) => b.rating - a.rating) : [];
     const navigate = useNavigate();
 
+    const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    if(!movies) {
-        return <div>No rankings found for: {platform.charAt(0).toUpperCase() + platform.slice(1)}.</div>;
+    const formattedPlatform = platform.charAt(0).toUpperCase() + platform.slice(1);
+
+    useEffect(() => {
+        getMoviesForPlatform(formattedPlatform)
+            .then((data) => {
+                console.log('Returned movies:', data);
+                setMovies(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setError('Failed to load movies');
+                setLoading(false);
+            });
+    }, [platform]);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
+    if (movies.length === 0) {
+        return (
+        <div className = "not-found-container">
+            <h1>No rankings found for: {platform.charAt(0).toUpperCase() + platform.slice(1)}</h1>
+            <button onClick={() => navigate(`/`)}>Return to Home</button>
+        </div>
+        );
     }
 
     return (
-        <div className="rankingpage-container">
-            <h2 className="header-title">Top Picks from {platform.charAt(0).toUpperCase() + platform.slice(1)}</h2>
-            <h3 className="ranking-title">Rankings</h3>
-            <ol className="ranking-ol">
-                {sortedMovies.map((movie, i) => (
-                    <li className="ranking-li" key={i}>
-                        {movie.title} - IMDb Rating: {movie.rating}
+        <div className="ranking-page">
+            <h2>Top Picks from {formattedPlatform}</h2>
+            <h3>Rankings</h3>
+            <ol className="ranking-list">
+                {movies.map((movie, i) => (
+                    <li key={i}>
+                        <img
+                            src={`https://image.tmdb.org/t/p/w185${movie.posterPath}`} 
+                            alt={`${movie.title} poster`}
+                        />
+                        {movie.title} - Rating: {movie.rating}
                     </li>
                 ))}
             </ol>
-            <button className = "return-button" onClick={() => navigate(`/`)}>Return to Home</button>
+            <button className = "rank-return-button" onClick={() => navigate(`/`)}>Return to Home</button>
         </div>
     );
 }

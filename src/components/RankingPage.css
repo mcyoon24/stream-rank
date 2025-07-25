@@ -1,29 +1,63 @@
-.rankingpage-container {
+/* Wrapper for page */
+.ranking-page {
     padding-left: 4rem;
-    margin: 0rem 6rem;
+    margin: 4rem 6rem;
     color: white;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.header-title {
+.ranking-page h2 {
     font-size: 3rem; 
     /* padding: 0.5rem 1rem; */
 }
 
-.ranking-title {
-    font-size: 1rem;
+.ranking-page h3 {
+    font-size: 1;
 }
 
-.ranking-ol{
-    font-size: 2rem;
+/* Ordered list container*/
+.ranking-list {
+    list-style-position: outside;
 }
 
+/* Item text */
 .ranking-li {
-    font-size: 1.2rem;
+    font-size: 1.75rem;
 }
 
-.return-button {
-    margin-top: 10rem;
+/* Item number */
+.ranking-list li::marker {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Movie image */
+.ranking-list img {
+    border-radius: 8px;
+    margin-right: 12px;
+    width: 100px;
+}
+
+/* home button */
+.rank-return-button {
+    margin-top: 30rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* not found wrapper */
+.not-found-container {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.not-found-container button {
+    margin-top: 2rem;
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
     background-color: #007bff;
