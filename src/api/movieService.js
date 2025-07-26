@@ -1,14 +1,20 @@
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-// gets the top rated movies
+// gets the top rated movies 
 export async function getTopRated() {
+    const urls = [];
+    for (let i = 1; i <= 4; i++) {
+        urls.push(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}&page=${i}`);
+    }
     try{
-        const res = await fetch(
-            `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`
-        );
-        const data = await res.json();
-        return data.results;
+        // get data
+        const responses = await Promise.all(urls.map(url => fetch(url)));
+        const data = await Promise.all(responses.map(res => res.json()));
+
+        // condense data into single array
+        const movies = data.flatMap(page => page.results);
+        return movies;
     }
     catch(error) {
         console.error('Fetch error: ' + error);
@@ -24,6 +30,8 @@ export async function getProvider(movieId) {
         );
         const data = await res.json();
         const usData = data.results?.US; // assigns if US region exists in results
+        console.log('PLATFORMS');
+        console.log(usData);
         return  usData?.flatrate ?? []; // returns the platforms if flatrate exists otherwise empty array
     } 
     catch(error) {
@@ -31,7 +39,7 @@ export async function getProvider(movieId) {
         return [];
     }
 }
-
+   
 // returns top rated movies for specific platform
 export async function getMoviesForPlatform(platformName) {
     try {
@@ -42,6 +50,9 @@ export async function getMoviesForPlatform(platformName) {
             allMovies.map(async (movie) => {
                 const platforms = await getProvider(movie.id);
                 const platformNames = platforms.map((p) => p.provider_name);
+                // console.log(movie.title);
+                // console.log(movie);
+                // console.log(platformNames);
                 return {
                     rating: movie.vote_average,
                     title: movie.title,
@@ -52,6 +63,7 @@ export async function getMoviesForPlatform(platformName) {
         );
 
         // filter for only the ones with the desired platform
+        // const filtered = platformMovies;
         const filtered = platformMovies.filter((movie) => movie.platform.includes(platformName));
 
         //sort movies

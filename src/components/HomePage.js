@@ -13,8 +13,9 @@ function HomePage() {
             <h1>Top Rated Movies for Streaming Services</h1>
             <div className="button-row">
                 <button onClick={() => handleClick('netflix')}>Netflix</button>
-                <button onClick={() => handleClick('hulu')}>Hulu</button>
-                <button onClick={() => handleClick('disney')}>Disney+</button>
+                <button onClick={() => handleClick('prime')}>Prime Video</button>
+                <button onClick={() => handleClick('max')}>HBO Max</button>
+                <button onClick={() => handleClick('paramount')}>Paramount+</button>
             </div>
         </div>     
     )

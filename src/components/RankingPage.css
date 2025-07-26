@@ -21,8 +21,8 @@
 }
 
 /* Item text */
-.ranking-li {
-    font-size: 1.75rem;
+.ranking-list li {
+    font-size: 2rem;
 }
 
 /* Item number */
@@ -35,6 +35,7 @@
 .ranking-list img {
     border-radius: 8px;
     margin-right: 12px;
+    vertical-align: middle;
     width: 100px;
 }
 

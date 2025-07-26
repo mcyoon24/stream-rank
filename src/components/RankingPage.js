@@ -3,18 +3,19 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMoviesForPlatform } from '../api/movieService';
+import platformNames from '../data/platformNames';
 
 
 function RankingPage() {
     const params = useParams();
     const platform = params.platform;
-    const navigate = useNavigate();
+    const formattedPlatform = platformNames[platform];
 
+    const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const formattedPlatform = platform.charAt(0).toUpperCase() + platform.slice(1);
+    // console.log(formattedPlatform);
 
     useEffect(() => {
         getMoviesForPlatform(formattedPlatform)
@@ -28,7 +29,7 @@ function RankingPage() {
                 setError('Failed to load movies');
                 setLoading(false);
             });
-    }, [platform]);
+    }, [formattedPlatform]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
