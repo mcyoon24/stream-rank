@@ -4,16 +4,17 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 // gets the top rated movies 
 export async function getTopRated() {
     const urls = [];
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 8; i++) {
         urls.push(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}&page=${i}`);
     }
     try{
         // get data
         const responses = await Promise.all(urls.map(url => fetch(url)));
         const data = await Promise.all(responses.map(res => res.json()));
-
         // condense data into single array
         const movies = data.flatMap(page => page.results);
+        // console.log(Object.keys(movies[0]));
+        // console.log(movies[0].overview);
         return movies;
     }
     catch(error) {
@@ -48,12 +49,15 @@ export async function getMoviesForPlatform(platformName) {
         // goes through every movie and returns title rating and platform
         const platformMovies = await Promise.all(
             allMovies.map(async (movie) => {
+                // console.log(Object.keys(movie));
                 const platforms = await getProvider(movie.id);
                 const platformNames = platforms.map((p) => p.provider_name);
                 // console.log(movie.title);
                 // console.log(movie);
                 // console.log(platformNames);
+                // console.log(movie.overview);
                 return {
+                    description: movie.overview,
                     rating: movie.vote_average,
                     title: movie.title,
                     platform: platformNames,

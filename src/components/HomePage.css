@@ -3,6 +3,10 @@
     padding: 2rem;
 }
 
+.homepage-container h1{
+    /* margin-left: 3rem; */
+    color: white;
+}
 .button-row {
     display: flex;
     gap: 1rem;

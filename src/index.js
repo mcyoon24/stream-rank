@@ -5,6 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import RankingPage from './components/RankingPage';
 import NotFound from './components/NotFound';
+import DescriptionPage from './components/DescriptionPage';
+
 
 console.log(NotFound);
 const router = createBrowserRouter([
@@ -15,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: '/rankings/:platform',
     element: <RankingPage />,
+  },
+  {
+    path: '/description/:title',
+    element: <DescriptionPage />,
   },
   {
     path: '*',

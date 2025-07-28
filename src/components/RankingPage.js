@@ -15,6 +15,17 @@ function RankingPage() {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const handleImgClick = (title, imgPath, description, platform) => {
+        navigate(`/description/${title}`, {
+            state: {
+                title: title,
+                path: imgPath,
+                description: description,
+                platform: platform,
+            }
+        });
+    }
     // console.log(formattedPlatform);
 
     useEffect(() => {
@@ -49,10 +60,12 @@ function RankingPage() {
             <ol className="ranking-list">
                 {movies.map((movie, i) => (
                     <li key={i}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w185${movie.posterPath}`} 
-                            alt={`${movie.title} poster`}
-                        />
+                        <button onClick={() => handleImgClick(movie.title, movie.posterPath, movie.description, platform)}>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w185${movie.posterPath}`} 
+                                alt={`${movie.title} poster`}
+                            />
+                        </button>
                         {movie.title} - Rating: {movie.rating}
                     </li>
                 ))}

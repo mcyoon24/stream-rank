@@ -1,0 +1,60 @@
+/* Page Wrapper */
+.description-page {
+    padding-left: 4rem;
+    margin: 4rem 6rem;
+    align-items: flex-start;
+    display:flex;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* Left Wrapper */
+.left
+{
+    padding: 0.3rem;
+    margin-left: 1rem;
+}
+
+/* Img */
+.left img {
+    border-radius: 1.2rem;
+    width: 19rem;
+    height: auto;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+/* Button Container */
+.buttons {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    gap: 2rem;
+}
+
+.buttons button{
+   
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.3rem;
+}
+
+/* Description Box Wrapper */
+.description-box {
+    /* margin-left: 2rem; */
+    padding: 2rem;
+}
+
+/* Title */
+.description-box h2 {
+    font-size: 3rem;
+}
+
+/* Paragraph Description */
+.description-box p {
+    font-size:  1.5rem;
+}

@@ -17,6 +17,12 @@ function HomePage() {
                 <button onClick={() => handleClick('max')}>HBO Max</button>
                 <button onClick={() => handleClick('paramount')}>Paramount+</button>
             </div>
+            <div className="button-row">
+                <button onClick={() => handleClick('disney')}>Disney+</button>
+                <button onClick={() => handleClick('hulu')}>Hulu</button>
+                <button onClick={() => handleClick('crunchyroll')}>Crunchyroll</button>
+                <button onClick={() => handleClick('youtube')}>Youtube TV</button>
+            </div>
         </div>     
     )
 }
