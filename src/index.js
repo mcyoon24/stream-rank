@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import HomePage from './components/HomePage';
-import RankingPage from './components/RankingPage';
-import NotFound from './components/NotFound';
-import DescriptionPage from './components/DescriptionPage';
+import "./index.css";
+
+import HomePage from './pages/HomePage';
+import RankingPage from './pages/RankingPage';
+import NotFound from './pages/NotFound';
+import DescriptionPage from './pages/DescriptionPage';
+import LoginPage from './pages/LoginPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 console.log(NotFound);
@@ -16,11 +20,23 @@ const router = createBrowserRouter([
   },
   {
     path: '/rankings/:platform',
-    element: <RankingPage />,
+    element: (
+      <ProtectedRoute>
+        <RankingPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/description/:title',
-    element: <DescriptionPage />,
+    element: (
+      <ProtectedRoute>
+        <DescriptionPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
   },
   {
     path: '*',

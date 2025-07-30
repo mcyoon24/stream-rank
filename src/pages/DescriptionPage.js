@@ -1,4 +1,4 @@
-import './DescriptionPage.css';
+import '../styles/DescriptionPage.css';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
