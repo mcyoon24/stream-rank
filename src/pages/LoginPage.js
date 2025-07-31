@@ -4,18 +4,17 @@ import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import "../styles/LoginPage.css";
 
-function LoginPage(e) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+function LoginPage() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError("");
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
+            console.log('SUCCESS');
             navigate("/");
         }
         catch(error) {
@@ -32,6 +31,7 @@ function LoginPage(e) {
                         type="email" 
                         placeholder="Email" 
                         value={email}
+                        // value = ''
                         onChange={(e) => setEmail(e.target.value)} 
                         required
                     />
@@ -39,10 +39,12 @@ function LoginPage(e) {
                         type="password" 
                         placeholder="Password" 
                         value={password}
+                        // value = 
                         onChange={(e) => setPassword(e.target.value)} 
                         required
                     />
-                    <button onClick={handleLogin}>Log In</button>
+                    <button type="submit">Log In</button>
+                    <button onClick={() => navigate("/signup")}>Don't have an account?</button>
                 </form> 
             </div>
         </div>

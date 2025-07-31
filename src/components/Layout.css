@@ -1,0 +1,14 @@
+/* Layout container */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+
+/* Main content area */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}

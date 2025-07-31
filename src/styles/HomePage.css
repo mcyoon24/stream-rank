@@ -4,7 +4,6 @@
 }
 
 .homepage-container h1{
-    /* margin-left: 3rem; */
     color: white;
 }
 .button-row {
@@ -23,11 +22,3 @@
     color: white;
     cursor: pointer;
 }
-
-/* body {
-    background-color: #2f2f2f;  
-    color: #bebebe;            
-    margin: 0;                  
-    font-family: Arial, sans-serif;
-    min-height: 100vh;         
-} */

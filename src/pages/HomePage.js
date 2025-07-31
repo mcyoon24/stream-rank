@@ -1,8 +1,21 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase';
 import '../styles/HomePage.css';
+
 
 function HomePage() {
     const navigate = useNavigate();
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => unsubscribe(); 
+    }, []);
 
     const handleClick = (platform) => {
         navigate(`/rankings/${platform}`);
