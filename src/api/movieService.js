@@ -31,8 +31,8 @@ export async function getProvider(movieId) {
         );
         const data = await res.json();
         const usData = data.results?.US; // assigns if US region exists in results
-        console.log('PLATFORMS');
-        console.log(usData);
+        // console.log('PLATFORMS');
+        // console.log(usData);
         return  usData?.flatrate ?? []; // returns the platforms if flatrate exists otherwise empty array
     } 
     catch(error) {
@@ -57,6 +57,7 @@ export async function getMoviesForPlatform(platformName) {
                 // console.log(platformNames);
                 // console.log(movie.overview);
                 return {
+                    id: movie.id,
                     description: movie.overview,
                     rating: movie.vote_average,
                     title: movie.title,

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { createUserProfile } from "../firestore";
 import { useNavigate } from "react-router-dom";
+
 import '../styles/SignUpPage.css';
+
 
 function SignUpPage() {
     const [email, setEmail] = useState("");
@@ -32,6 +35,7 @@ function SignUpPage() {
             console.log("email: ", email);
             console.log("password: ", password);
             await createUserWithEmailAndPassword(auth, email, password);
+            await createUserProfile(auth.currentUser.uid, email);
             navigate("/login"); // sends to login with successful signup
         }
         catch (error) {

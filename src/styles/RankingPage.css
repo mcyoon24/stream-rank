@@ -17,7 +17,9 @@
 
 /* Ordered list container*/
 .ranking-list {
-    list-style-position: outside;
+    /* list-style-position: inside; */
+    list-style-type: none;
+    margin-left: 0rem;
 }
 
 /* Item text */
@@ -74,4 +76,31 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Container for each ranking line */
+.ranking-item-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rank-number {
+    font-weight: bold;
+    min-width: 20px;
+}
+
+/* Favorite button */
+.star-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-button:hover,
+.star-button.favorited {
+    color: gold;
 }
