@@ -12,12 +12,14 @@ export async function createUserProfile(uid, email) {
 
 export async function addFavoriteMovie(uid, movie) {
     const userRef = doc(db, "users", uid);
-    await updateDoc(userRef, {favoriteMovies: arrayUnion(movie)});
+    const normalizedMovie = normalizeMovie(movie);
+    await updateDoc(userRef, {favoriteMovies: arrayUnion(normalizedMovie)});
 }
 
 export async function removeFavoriteMovie(uid, movie) {
     const userRef = doc(db, "users", uid);
-    await updateDoc(userRef, {favoriteMovies: arrayRemove(movie)});
+    const normalizedMovie = normalizeMovie(movie);
+    await updateDoc(userRef, { favoriteMovies: arrayRemove(normalizedMovie) })
 }
 
 export async function getUserFavorites(uid) {
@@ -30,4 +32,15 @@ export async function getUserFavorites(uid) {
     } else {
         return [];
     }
+}
+
+export function normalizeMovie(movie) {
+    return {
+        id: movie.id,
+        title: movie.title,
+        description: movie.description || "No description available.",
+        rating: movie.rating || 0,
+        posterPath: movie.posterPath || movie.path || "",
+        platform: movie.platform || [],
+    };
 }

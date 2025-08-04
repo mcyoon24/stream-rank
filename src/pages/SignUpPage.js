@@ -34,9 +34,14 @@ function SignUpPage() {
             console.log("SIGNUP RAN");
             console.log("email: ", email);
             console.log("password: ", password);
-            await createUserWithEmailAndPassword(auth, email, password);
-            await createUserProfile(auth.currentUser.uid, email);
-            navigate("/login"); // sends to login with successful signup
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            await createUserProfile(user.uid, email);
+
+            // console.log("Navigating to login...");
+            // navigate("/");
+            // console.log("Did navigate run?");
+            window.location.href = "/";
         }
         catch (error) {
             console.error(error);

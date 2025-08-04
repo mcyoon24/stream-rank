@@ -9,4 +9,8 @@ const platformNames = {
     crunchyroll: 'Crunchyroll',
 };
 
-export default platformNames;
+const platformKeys = Object.fromEntries(
+    Object.entries(platformNames).map(([key, val]) => [val, key])
+);
+
+export { platformNames, platformKeys };

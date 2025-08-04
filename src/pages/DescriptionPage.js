@@ -1,16 +1,25 @@
 import '../styles/DescriptionPage.css';
-import { useLocation } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
+import { useFavorites } from '../hooks/useFavorites';
 
 
 function DescriptionPage() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { title, path, description, platform } = location.state || {};
-    
+    const { id, title, path, description, platform, rating } = location.state || {};
+    const { favorites, handleFavorite } = useFavorites();
+
     const backButton = () => {
         navigate(`/rankings/${platform}`);
     }
+    // console.log(rating);
+    const movie = {
+        id: id,
+        title: title,
+        posterPath: path,
+        description: description,
+        rating: rating,
+    };
 
     return (
         <div className='description-page'> 
@@ -25,9 +34,21 @@ function DescriptionPage() {
                 </div>
             </div>
 
-            <div className='description-box'>
-                <h2>{title}</h2>
+            <div className='right'>
+                <div className='title-row'>
+                    <h2>{title}</h2>
+                    <button
+                        className={`star-button ${favorites.some(fav => fav.id === movie.id) ? 'favorited' : ''}`}
+                        onClick={() => handleFavorite(movie)}
+                        >
+                        ★
+                    </button>
+                </div>
+                <div className='description-box'>
+                <h3>{rating}</h3>    
                 <p>{description}</p>
+                    
+                </div>
             </div>
         </div>
     )

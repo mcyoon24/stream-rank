@@ -1,9 +1,9 @@
-import styles from "./HomeButton.css"
+import "./HomeButton.css"
 
 
 function HomeButton() {
     return (
-        <button className={styles.home} onClick={() => navigate(`/`)}>Return to Home</button> 
+        <button className='home' onClick={() => navigate(`/`)}>Return to Home</button> 
     )
 }
 

@@ -2,10 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMoviesForPlatform } from '../api/movieService';
-import platformNames from '../data/platformNames';
-
-import { addFavoriteMovie, getUserFavorites, removeFavoriteMovie } from '../firestore';
-import { auth } from '../firebase';
+import { platformNames } from '../data/platformNames';
+import { useFavorites } from '../hooks/useFavorites';
 
 import '../styles/RankingPage.css';
 
@@ -19,49 +17,18 @@ function RankingPage() {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [favorites, setFavorites] = useState([]);
 
+    const { favorites, handleFavorite } = useFavorites();
 
-    
-    const handleFavorite = async(movie) => {
-        const user = auth.currentUser;
-        // console.log(movie.title);
-        // console.log(movie.posterPath);
-        // console.log(movie.id);
-        if(!user) {
-            alert("Must be logged in to favorite movies")
-            return;
-        }
-
-        try {
-            if (favorites.includes(movie.id)){
-                await removeFavoriteMovie(user.uid, {
-                    id: movie.id,
-                    title: movie.title,
-                    path: movie.posterPath,
-                }) 
-                setFavorites((prev) => prev.filter(id => id !== movie.id));
-            } else {
-                await addFavoriteMovie(user.uid, {
-                    id: movie.id,
-                    title: movie.title,
-                    path: movie.posterPath,
-                })
-                setFavorites((prev) => [...prev, movie.id]);
-            }
-        }
-        catch(error){
-            console.error("Error adding favorite:", error);
-        }
-    }
-
-    const handleImgClick = (title, imgPath, description, platform) => {
+    const handleImgClick = (id, title, imgPath, description, platform, rating) => {
         navigate(`/description/${title}`, {
             state: {
+                id: id,
                 title: title,
                 path: imgPath,
                 description: description,
                 platform: platform,
+                rating: rating,
             }
         });
     }
@@ -80,17 +47,6 @@ function RankingPage() {
                 setLoading(false);
             });
     }, [formattedPlatform]);
-
-    useEffect(() => {
-        const user = auth.currentUser;
-        if(user) {
-            getUserFavorites(user.uid)
-                .then(favs => {
-                    setFavorites(favs.map(movie => movie.id));
-                })
-                .catch(console.error);
-        }
-    }, [])
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
@@ -112,13 +68,13 @@ function RankingPage() {
                     <li key={i}>
                         <div className="ranking-item-container">
                             <button
-                                className={`star-button ${favorites.includes(movie.id) ? 'favorited' : ''}`}
+                                className={`star-button ${favorites.some(fav => fav.id === movie.id) ? 'favorited' : ''}`}
                                 onClick={() => handleFavorite(movie)}
                             >       
                                 ★
                             </button>
                             <span className="rank-number">{i + 1}.</span>
-                            <button onClick={() => handleImgClick(movie.title, movie.posterPath, movie.description, platform)}>
+                            <button onClick={() => handleImgClick(movie.id, movie.title, movie.posterPath, movie.description, platform, movie.rating)}>
                                 <img
                                     src={`https://image.tmdb.org/t/p/w185${movie.posterPath}`} 
                                     alt={`${movie.title} poster`}

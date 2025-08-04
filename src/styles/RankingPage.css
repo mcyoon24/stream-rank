@@ -47,6 +47,11 @@
     margin-right: 12px;
     vertical-align: middle;
     width: 100px;
+    transition: transform 0.2s ease-in-out;  
+}
+
+.ranking-list img:hover {
+    transform: scale(1.05);
 }
 
 /* home button */

@@ -56,20 +56,26 @@ export async function getMoviesForPlatform(platformName) {
                 // console.log(movie);
                 // console.log(platformNames);
                 // console.log(movie.overview);
-                return {
-                    id: movie.id,
-                    description: movie.overview,
-                    rating: movie.vote_average,
-                    title: movie.title,
-                    platform: platformNames,
-                    posterPath: movie.poster_path,
+
+                // return {
+                //     id: movie.id,
+                //     description: movie.overview,
+                //     rating: movie.vote_average,
+                //     title: movie.title,
+                //     platform: platformNames,
+                //     posterPath: movie.poster_path,
+                // }
+
+                // filter for desired platform
+                if (platformNames.includes(platformName)) {
+                    return normalizeMovie(movie, platformName); 
+                } else {
+                    return null;
                 }
             })
         );
 
-        // filter for only the ones with the desired platform
-        // const filtered = platformMovies;
-        const filtered = platformMovies.filter((movie) => movie.platform.includes(platformName));
+        const filtered = platformMovies.filter(Boolean); // Remove nulls
 
         //sort movies
         return filtered ? [...filtered].sort((a, b) => b.rating - a.rating) : [];
@@ -78,4 +84,15 @@ export async function getMoviesForPlatform(platformName) {
         console.error(error);
         return [];
     }
+}
+
+function normalizeMovie(movie, platform) {
+  return {
+    id: movie.id,
+    title: movie.title,
+    description: movie.overview || "No description available.",
+    rating: movie.vote_average ?? 0,
+    posterPath: movie.poster_path,
+    platform: platform
+  };
 }
