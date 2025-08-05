@@ -1,6 +1,7 @@
 import '../styles/DescriptionPage.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFavorites } from '../hooks/useFavorites';
+import DiscussionBoard from '../components/DiscussionBoard';
 
 
 function DescriptionPage() {
@@ -45,11 +46,12 @@ function DescriptionPage() {
                     </button>
                 </div>
                 <div className='description-box'>
-                <h3>{rating}</h3>    
-                <p>{description}</p>
-                    
+                    <h3>{rating}</h3>    
+                    <p>{description}</p>
                 </div>
+                <DiscussionBoard movieId={movie.id} />
             </div>
+
         </div>
     )
 }

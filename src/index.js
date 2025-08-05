@@ -10,7 +10,6 @@ import NotFound from './pages/NotFound';
 import DescriptionPage from './pages/DescriptionPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-// import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import FavoritesPage from './pages/FavoritesPage';
 

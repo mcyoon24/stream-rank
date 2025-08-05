@@ -1,0 +1,51 @@
+.discussion-board {
+    margin-top: 2rem;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+}
+
+.discussion-board h3 {
+    font-size: 1.3rem;
+}
+
+.comment-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.comment-list li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.comment-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.comment-form textarea {
+    resize: vertical;
+    min-height: 60px;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.comment-form button {
+    align-self: flex-start;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.delete-button {
+    margin-left: 1rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}

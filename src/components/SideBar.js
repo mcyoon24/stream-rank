@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from '../firebase';
+import { getUserProfile } from '../firestore';
 import { useNavigate } from 'react-router-dom';
 import './SideBar.css';
 
 
 function SideBar ({ user }) {
+    const [profile, setProfile] = useState(null);
     const [showPlatforms, setShowPlatforms] = useState(false);
     const navigate = useNavigate();
-    if(!user) {
-        return null;
-    }
 
-    if (!user){
+    useEffect(() => {
+        if (user) {
+            getUserProfile(user.uid).then(data => {
+                setProfile(data);
+            });
+        }
+    }, [user]);
+
+    if(!user || !profile) {
         return null;
     }
+    console.log(profile.username);
 
     const handleSignout = async () => {
         try {
@@ -31,7 +39,7 @@ function SideBar ({ user }) {
         <aside className="sidebar-container">
             <div className="profile-container">
                 <h2>Hello,</h2>
-                <p>{user.email}</p>
+                <p>{profile.username || user.email}</p>
             </div>
 
             <nav className="sidebar-nav">

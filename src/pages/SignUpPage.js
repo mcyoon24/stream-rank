@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { createUserProfile } from "../firestore";
-import { useNavigate } from "react-router-dom";
 
 import '../styles/SignUpPage.css';
 
 
 function SignUpPage() {
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -32,15 +31,11 @@ function SignUpPage() {
 
         try {
             console.log("SIGNUP RAN");
-            console.log("email: ", email);
-            console.log("password: ", password);
+            console.log( {username} );
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            await createUserProfile(user.uid, email);
-
-            // console.log("Navigating to login...");
-            // navigate("/");
-            // console.log("Did navigate run?");
+            await updateProfile(user, { username });
+            await createUserProfile(user.uid, email, username);
             window.location.href = "/";
         }
         catch (error) {
@@ -53,6 +48,13 @@ function SignUpPage() {
             <div className='signup-box-container'>
                 <h2>Create Your Account</h2>
                 <form className='signup-form' onSubmit={handleSignup}>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
                     <input
                         type="email"
                         placeholder="Email"
