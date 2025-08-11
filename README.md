@@ -25,12 +25,15 @@ APIs: TMDB API for movie/TV data
 Other Tools: Git, npm
 
 ## How It Works
+1. StreamRank connects to the TMDB API to fetch top-rated movies and TV shows across major streaming platforms.
 
-1. Fetches movie/TV data from TMDB API
+2. User Sign-In: Users log in with Google or email.
 
-2. Displays ranked lists by streaming platform
+3. Personalization: Each user sets a custom display name and sees a personalized sidebar.
 
-3. Allows users to discuss and share recommendations
+4. Ranking Pages: Browse rankings by platform with pagination for smooth navigation.
 
-4. Supports dynamic pagination for smoother browsing
+5. Discussion Board: Post and reply to comments in real-time using Firestore.
+
+6. Live Updates: New content and comments appear instantly without page reloads.
 
