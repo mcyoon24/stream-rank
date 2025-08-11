@@ -24,6 +24,14 @@ APIs: TMDB API for movie/TV data
 
 Other Tools: Git, npm
 
+## Showcase
+
+![ScreenRecording2025-08-11113554-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ddd0a01a-b9f4-435c-9c19-6d86e3447060)
+
+![ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/0af3e309-3f22-430e-8a57-88c37453329d)
+
+![ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/0783afc2-9b63-4a67-8604-12604101517f)
+
 ## How It Works
 1. StreamRank connects to the TMDB API to fetch top-rated movies and TV shows across major streaming platforms.
 
